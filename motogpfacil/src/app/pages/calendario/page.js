@@ -3,9 +3,33 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import calendarioStyles from "../../Calendario.module.css";
+import navbarStyles from "../../navbar.css";
 
 function Calendario() {
   const [eventos, setEventos] = useState([]);
+
+  // Mapeo de países a banderas
+  const banderas = {
+    Tailandia: "Tailandia.png",
+    Argentina: "Argentina.png",
+    "Estados Unidos": "EstadosUnidos.png",
+    Qatar: "Qatar.png",
+    España: "España.png",
+    Francia: "France.png",
+    "Reino Unido": "ReinoUnido.png",
+    Italia: "Italia.png",
+    "Países Bajos": "PaisesBajos.png",
+    Alemania: "Alemania.png",
+    "República Checa": "RepublicaCheca.png",
+    Austria: "Austria.png",
+    Hungría: "Hungria.png",
+    Japón: "Japon.png",
+    Indonesia: "Indonesia.png",
+    Australia: "Australia.png",
+    Malasia: "Malasia.png",
+    Portugal: "Portugal.png",
+  };
 
   async function fetchContacts() {
     const response = await fetch("/api/calendario/");
@@ -18,79 +42,90 @@ function Calendario() {
   }, []);
 
   return (
-    <div className="bg-dark min-vh-100 text-light">
+    <div className={calendarioStyles.calendarioContainer}>
       {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
-        <div className="container-fluid">
-          <Link href="../" className="navbar-brand">
-            Inicio
-          </Link>
+      <nav className={`navbar navbar-expand-lg navbar-dark ${navbarStyles.navbar}`}>
+        <div className="container">
           <button
             className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
+            data-bs-target="#navbarNavCentered"
+            aria-controls="navbarNavCentered"
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <Link href="/pages/calendario/" className="nav-link">
-                  Calendario
+
+          <div className="collapse navbar-collapse" id="navbarNavCentered">
+            <div className="row w-100 align-items-center">
+              <div className="col-4 d-flex justify-content-start">
+                <ul className="navbar-nav">
+                  <li className="nav-item">
+                    <Link href="/pages/calendario/" className="nav-link fs-5">
+                      Calendario
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link href="/pages/contacto" className="nav-link fs-5">
+                      Contacto
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="col-4 d-flex justify-content-center">
+                <Link href="../" className="navbar-brand d-flex flex-column align-items-center">
+                  <img src="/images/logoMotogpFacil.png" alt="MotoGP Facil" style={{ width: "50px", height: "auto" }} />
+                  <span className="fs-4">MotoGP Facil</span>
                 </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/pages/contacto" className="nav-link">
-                  Contacto
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/pages/equipos" className="nav-link">
-                  Equipos
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/pages/pilotos" className="nav-link">
-                  Pilotos
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/pages/reglamento" className="nav-link">
-                  Reglamento
-                </Link>
-              </li>
-            </ul>
+              </div>
+
+              <div className="col-4 d-flex justify-content-end">
+                <ul className="navbar-nav">
+                  <li className="nav-item">
+                    <Link href="/pages/equipos" className="nav-link fs-5">
+                      Equipos
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link href="/pages/pilotos" className="nav-link fs-5">
+                      Pilotos
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link href="/pages/reglamento" className="nav-link fs-5">
+                      Reglamento
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
 
+      {/* Título */}
+      <div className={calendarioStyles.tituloContainer}>
+        <h1 className={calendarioStyles.titulo}>CALENDARIO 2024 MOTOGP</h1>
+      </div>
+
       {/* Eventos */}
       <div className="container">
-        <div className="row">
-          {eventos.map((evento) => (
-            <div key={evento.id} className="col-sm-12 col-md-6 col-lg-4 mb-4">
-              <div className="card h-100">
-                <img
-                  src={evento.imageUrl}
-                  alt={`Imagen del circuito ${evento.circuito}`}
-                  className="card-img-top"
-                />
-                <div className="card-body text-dark">
-                  <h5 className="card-title">{evento.circuito}</h5>
-                  <p className="card-text mb-1">
-                    <strong>Inicio:</strong> {evento.fecha_inicio}
-                  </p>
-                  <p className="card-text mb-1">
-                    <strong>Fin:</strong> {evento.fecha_fin}
-                  </p>
-                  <p className="card-text mb-0">
-                    <strong>País:</strong> {evento.pais}
+        <div className="row justify-content-center">
+          {eventos.map((evento, index) => (
+            <div key={evento.id} className="col-12 col-md-6 col-lg-4 mb-4">
+              <div className={calendarioStyles.eventoCard}>
+                <div className={calendarioStyles.numero}>{index + 1}</div>
+                <div className={calendarioStyles.info}>
+                  <h5 className={calendarioStyles.nombre}>{evento.circuito}</h5>
+                  <p className={calendarioStyles.fechas}>{evento.fecha_inicio} - {evento.fecha_fin}</p>
+                  <p className={calendarioStyles.ubicacion}>
+                    {evento.pais} <img src={`/images/banderas/${banderas[evento.pais]}`} alt={evento.pais} className={calendarioStyles.banderaPais} />
                   </p>
                 </div>
+                <img src={evento.imageUrl} alt={evento.pais} className={calendarioStyles.bandera} />
               </div>
             </div>
           ))}

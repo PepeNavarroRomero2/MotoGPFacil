@@ -1,0 +1,60 @@
+/* Navbar en la parte superior sin estar fijo */
+.navbar {
+    background-color: #1a1a1a;
+    border-bottom: 2px solid #e3e3e3;
+    padding: 10px 0;
+    width: 100%; /* Asegurarse de que ocupe todo el ancho */
+  }
+  
+  .navbar .container {
+    max-width: 100%; /* Eliminar el límite de ancho del contenedor */
+    padding-left: 0; /* Asegurarse de que no tenga márgenes internos */
+    padding-right: 0; /* Asegurarse de que no tenga márgenes internos */
+  }
+  
+  .navbar-toggler {
+    border-color: #e3e3e3;
+  }
+  
+  .navbar-nav {
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center; /* Asegura que los enlaces se centren */
+  }
+  
+  .navbar-nav .nav-link {
+    font-size: 1.25rem;
+    margin: 0 15px; /* Espaciado entre los enlaces */
+  }
+  
+  .navbar .col-4 {
+    display: flex;
+    justify-content: center; /* Centra el contenido en el área */
+  }
+  
+  .navbar-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .navbar-brand img {
+    width: 50px;
+    height: auto;
+    margin-bottom: 5px;
+  }
+  
+  @media (max-width: 992px) {
+    /* Para pantallas pequeñas, centrar los enlaces */
+    .navbar-nav {
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+    }
+    .navbar-nav .nav-item {
+      margin: 10px 0; /* Añadir espacio entre los elementos */
+    }
+  }
+  
+  /* No es necesario agregar padding-top para el body ya que no está fijo */
+  
