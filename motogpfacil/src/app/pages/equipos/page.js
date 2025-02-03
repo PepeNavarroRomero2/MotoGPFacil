@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import navbarStyles from "../../navbar.css";
 import Link from "next/link";
+import "../../Equipos.css"
 
 function Equipos() {
   const [equipos, setEquipos] = useState([]);
