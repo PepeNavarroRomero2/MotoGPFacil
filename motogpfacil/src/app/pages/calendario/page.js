@@ -8,8 +8,6 @@ import navbarStyles from "../../navbar.css";
 
 function Calendario() {
   const [eventos, setEventos] = useState([]);
-
-  // Mapeo de países a banderas
   const banderas = {
     Tailandia: "Tailandia.png",
     Argentina: "Argentina.png",
