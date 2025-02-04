@@ -1,6 +1,5 @@
-/* Contenedor del cuestionario */
 .quiz-container {
-    background-color: #343a40; /* Fondo oscuro */
+    background-color: #343a40;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     padding: 30px;
@@ -13,7 +12,7 @@
   .quiz-container h2 {
     font-size: 26px;
     font-weight: 600;
-    color: #f8f9fa; /* Texto claro sobre fondo oscuro */
+    color: #f8f9fa;
   }
   
   .options button {
@@ -21,25 +20,24 @@
     padding: 10px 20px;
     border-radius: 5px;
     width: 100%;
-    background-color: #007bff; /* Color de fondo para los botones */
+    background-color: #007bff;
     color: white;
     border: none;
   }
   
   .options button:hover {
-    background-color: #0056b3; /* Color al pasar el ratón sobre el botón */
+    background-color: #0056b3;
   }
   
   .quiz-container p {
     font-size: 16px;
-    color: #adb5bd; /* Gris claro para el texto */
+    color: #adb5bd;
     text-align: center;
   }
-  
-  /* Resultados */
+
   .result {
     text-align: center;
-    background-color: #495057; /* Fondo oscuro para la sección de resultados */
+    background-color: #495057;
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
@@ -52,25 +50,25 @@
   .result h2 {
     font-size: 28px;
     font-weight: bold;
-    color: #f8f9fa; /* Texto claro sobre fondo oscuro */
+    color: #f8f9fa;
   }
   
   .result p {
     font-size: 22px;
     margin-bottom: 20px;
-    color: #f8f9fa; /* Texto claro para mostrar la puntuación */
+    color: #f8f9fa;
   }
   
   .result button {
     font-size: 18px;
     padding: 12px 25px;
     border-radius: 5px;
-    background-color: #28a745; /* Color verde para el botón */
+    background-color: #28a745;
     color: white;
     border: none;
   }
   
   .result button:hover {
-    background-color: #218838; /* Color verde oscuro al pasar el ratón */
+    background-color: #218838;
   }
   

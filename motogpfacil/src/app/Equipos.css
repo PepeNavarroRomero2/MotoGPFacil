@@ -1,9 +1,6 @@
-   /* Contenedor principal */
-  .container {
+.container {
     max-width: 1100px;
   }
-  
-  /* Estilo de los botones de fabricantes */
   .btn-secondary,
   .btn-danger,
   .btn-dark {
@@ -28,8 +25,7 @@
     background-color: #1c1c1e;
     transform: scale(1.05);
   }
-  
-  /* Tarjetas de equipos */
+
   .card {
     border: none;
     border-radius: 15px;
@@ -46,8 +42,7 @@
     background: #f8f9fa;
     border-radius: 15px;
   }
-  
-  /* Títulos */
+
   h1 {
     font-size: 36px;
     font-weight: bold;
@@ -64,8 +59,7 @@
   .text-muted {
     font-size: 16px;
   }
-  
-  /* Mensaje de "No hay equipos" */
+
   .text-muted.mt-3 {
     font-size: 18px;
     font-style: italic;
