@@ -4,20 +4,19 @@ import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
-// Mapeo de fk_equipo a colores (según los colores que mencionaste)
 const teamColors = {
-  4: "orange",         // naranja
-  11: "darkblue",      // azul oscuro
-  1: "red",            // rojo
-  6: "orange",         // naranja
-  3: "green",          // verde
-  5: "purple",         // morado
-  7: "white",          // blanco
-  12: "white",         // blanco
-  9: "orange",         // naranja
-  8: "yellow",         // amarillo
-  2: "#708090",        // azul grisaceo
-  10: "blue"           // azul
+  4: "orange",
+  11: "darkblue",
+  1: "red",
+  6: "orange",
+  3: "green",
+  5: "purple",
+  7: "white",
+  12: "white",
+  9: "orange",
+  8: "yellow",
+  2: "#708090",
+  10: "blue"
 };
 
 function Pilotos() {
@@ -112,7 +111,6 @@ function Pilotos() {
       <div className="container">
         <div className="row justify-content-center">
           {pilotos.map((piloto) => {
-            // Obtenemos el color del equipo según la fk, con blanco por defecto
             const teamColor = teamColors[piloto.fk_equipo] || "white";
             return (
               <div

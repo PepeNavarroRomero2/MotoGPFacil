@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import Link from "next/link"; // Asegúrate de importar Link de Next.js
-import "../../Reglamento.css"; // Mantén el archivo CSS del navbar como está
-import "../../navbar.css"; // Mantén el archivo CSS del navbar como está
+import Link from "next/link"
+import "../../Reglamento.css";
+import "../../navbar.css";
 
 function MotoGPQuiz() {
   const [questions, setQuestions] = useState([]);
@@ -12,7 +12,6 @@ function MotoGPQuiz() {
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
 
-  // Obtiene las preguntas del reglamento desde la API
   async function fetchReglamento() {
     try {
       const response = await fetch("/api/reglamento/");
@@ -24,7 +23,6 @@ function MotoGPQuiz() {
     }
   }
 
-  // Genera el cuestionario con las preguntas y respuestas formateadas
   function generateQuiz(data) {
     const formattedQuestions = data.map((regla) => {
       const incorrectAnswers = data
@@ -45,10 +43,9 @@ function MotoGPQuiz() {
   }
 
   useEffect(() => {
-    fetchReglamento(); // Llama a la función para obtener las preguntas al cargar el componente
+    fetchReglamento();
   }, []);
 
-  // Maneja la respuesta seleccionada por el usuario
   function handleAnswer(option) {
     if (option === questions[currentQuestion].correctAnswer) {
       setScore(score + 1);

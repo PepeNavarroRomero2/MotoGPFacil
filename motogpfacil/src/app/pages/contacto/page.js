@@ -1,6 +1,8 @@
 "use client";
+
 import React, { useState } from "react";
 import Link from "next/link";
+import emailjs from "@emailjs/browser";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import styles from "../../navbar.css";
@@ -13,18 +15,21 @@ function Contacto() {
   });
 
   const [errors, setErrors] = useState({});
+  const [sending, setSending] = useState(false);
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
-  }
+  };
 
-  function validateForm() {
-    let newErrors = {};
-    if (!formData.nombre.trim()) newErrors.nombre = "El nombre es obligatorio.";
-    if (!formData.correo.trim()) newErrors.correo = "El correo es obligatorio.";
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.nombre.trim())
+      newErrors.nombre = "El nombre es obligatorio.";
+    if (!formData.correo.trim())
+      newErrors.correo = "El correo es obligatorio.";
     else if (!/\S+@\S+\.\S+/.test(formData.correo))
       newErrors.correo = "Correo inválido.";
     if (!formData.mensaje.trim())
@@ -32,21 +37,49 @@ function Contacto() {
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  }
+  };
 
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!validateForm()) return;
-    alert("Mensaje enviado correctamente.");
-    setFormData({ nombre: "", correo: "", mensaje: "" });
-    setErrors({});
-  }
+    setSending(true);
+    const serviceID = "service_tvnz84o";
+    const templateID = "template_59r5l2b";
+    const userID = "ChmeFoDigJPW9kB9y";
+
+    const templateParams = {
+      nombre: formData.nombre,
+      correo: formData.correo,
+      mensaje: formData.mensaje,
+    };
+
+    try {
+      const result = await emailjs.send(
+        serviceID,
+        templateID,
+        templateParams,
+        userID
+      );
+      console.log("Mensaje enviado correctamente", result);
+      alert("Mensaje enviado correctamente.");
+      setFormData({ nombre: "", correo: "", mensaje: "" });
+      setErrors({});
+    } catch (error) {
+      console.error("Error al enviar mensaje:", error);
+      alert("Error al enviar el mensaje.");
+      console.error("Error al enviar mensaje:", JSON.stringify(error, null, 2));
+      console.error("Propiedades del error:", Object.keys(error));
+
+    } finally {
+      setSending(false);
+    }
+  };
 
   return (
     <div className="bg-dark min-vh-100 text-light">
       <nav className={`navbar navbar-expand-lg navbar-dark ${styles.navbar}`}>
         <div className="container">
-          {/* Botón para colapsar la barra en pantallas pequeñas */}
           <button
             className="navbar-toggler"
             type="button"
@@ -61,53 +94,49 @@ function Contacto() {
 
           <div className="collapse navbar-collapse" id="navbarNavCentered">
             <div className="row w-100 align-items-center">
-              {/* Sección izquierda con algunos enlaces */}
               <div className="col-4 d-flex justify-content-start">
                 <ul className="navbar-nav">
                   <li className="nav-item">
-                    <Link href="/pages/calendario/" className="nav-link fs-5">
-                      Calendario
+                    <Link href="/pages/calendario/">
+                      <span className="nav-link fs-5">Calendario</span>
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link href="/pages/contacto" className="nav-link fs-5">
-                      Contacto
+                    <Link href="/pages/contacto">
+                      <span className="nav-link fs-5">Contacto</span>
                     </Link>
                   </li>
                 </ul>
               </div>
 
-              {/* Sección central con el logo y el texto */}
               <div className="col-4 d-flex justify-content-center">
-                <Link
-                  href="../"
-                  className="navbar-brand d-flex flex-column align-items-center"
-                >
-                  <img
-                    src="/images/logoMotogpFacil.png"
-                    alt="MotoGP Facil"
-                    style={{ width: "50px", height: "auto" }}
-                  />
-                  <span className="fs-4">MotoGP Facil</span>
+                <Link href="../">
+                  <span className="navbar-brand d-flex flex-column align-items-center">
+                    <img
+                      src="/images/logoMotogpFacil.png"
+                      alt="MotoGP Facil"
+                      style={{ width: "50px", height: "auto" }}
+                    />
+                    <span className="fs-4">MotoGP Facil</span>
+                  </span>
                 </Link>
               </div>
 
-              {/* Sección derecha con el resto de enlaces */}
               <div className="col-4 d-flex justify-content-end">
                 <ul className="navbar-nav">
                   <li className="nav-item">
-                    <Link href="/pages/equipos" className="nav-link fs-5">
-                      Equipos
+                    <Link href="/pages/equipos">
+                      <span className="nav-link fs-5">Equipos</span>
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link href="/pages/pilotos" className="nav-link fs-5">
-                      Pilotos
+                    <Link href="/pages/pilotos">
+                      <span className="nav-link fs-5">Pilotos</span>
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link href="/pages/reglamento" className="nav-link fs-5">
-                      Reglamento
+                    <Link href="/pages/reglamento">
+                      <span className="nav-link fs-5">Reglamento</span>
                     </Link>
                   </li>
                 </ul>
@@ -116,7 +145,7 @@ function Contacto() {
           </div>
         </div>
       </nav>
-      {/* Formulario de Contacto */}
+
       <div className="container py-4">
         <h2 className="mb-3">Contacto</h2>
         <form
@@ -165,8 +194,8 @@ function Contacto() {
             )}
           </div>
 
-          <button type="submit" className="btn btn-primary w-100">
-            Enviar
+          <button type="submit" className="btn btn-primary w-100" disabled={sending}>
+            {sending ? "Enviando..." : "Enviar"}
           </button>
         </form>
       </div>
