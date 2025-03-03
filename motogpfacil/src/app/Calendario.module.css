@@ -1,9 +1,3 @@
-.container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-}
-
 .calendarioContainer {
     background-image: url('/images/BackGroundCalendario.png');
     background-size: cover;
@@ -45,7 +39,6 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     min-height: 220px;
     width: 100%;
-    height: auto;
     justify-content: space-between;
 }
 
@@ -124,4 +117,3 @@
     display: flex;
     flex-direction: column;
 }
-
