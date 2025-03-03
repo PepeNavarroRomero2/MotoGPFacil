@@ -1,10 +1,14 @@
 "use client";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import styles from "./navbar.css";
 
 export default function Home() {
+  useEffect(() => {
+    import("bootstrap/dist/js/bootstrap.bundle.min.js");
+  }, []);
+
   return (
     <div className="bg-dark min-vh-100 text-light">
       <nav className={`navbar navbar-expand-lg navbar-dark ${styles.navbar}`}>

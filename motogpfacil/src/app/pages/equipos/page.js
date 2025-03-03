@@ -1,9 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import navbarStyles from "../../navbar.css";
 import Link from "next/link";
-import "../../Equipos.css"
+import "bootstrap/dist/css/bootstrap.min.css";
+// Se elimina la importación estática de Bootstrap JS
+import navbarStyles from "../../navbar.css";
+import "../../Equipos.css";
 
 function Equipos() {
   const [equipos, setEquipos] = useState([]);
@@ -24,16 +25,25 @@ function Equipos() {
 
   useEffect(() => {
     if (fabricanteSeleccionado) {
-      const filtrados = equipos.filter((equipo) => equipo.escuderia === fabricanteSeleccionado);
+      const filtrados = equipos.filter(
+        (equipo) => equipo.escuderia === fabricanteSeleccionado
+      );
       setEquiposFiltrados(filtrados);
     } else {
       setEquiposFiltrados(equipos);
     }
   }, [fabricanteSeleccionado, equipos]);
 
+  // Carga dinámica del JS de Bootstrap (solo en el cliente)
+  useEffect(() => {
+    import("bootstrap/dist/js/bootstrap.bundle.min.js");
+  }, []);
+
   return (
     <>
-      <nav className={`navbar navbar-expand-lg navbar-dark ${navbarStyles.navbar}`}>
+      <nav
+        className={`navbar navbar-expand-lg navbar-dark ${navbarStyles.navbar}`}
+      >
         <div className="container">
           <button
             className="navbar-toggler"
@@ -46,7 +56,6 @@ function Equipos() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-
           <div className="collapse navbar-collapse" id="navbarNavCentered">
             <div className="row w-100 align-items-center">
               <div className="col-4 d-flex justify-content-start">
@@ -63,14 +72,19 @@ function Equipos() {
                   </li>
                 </ul>
               </div>
-
               <div className="col-4 d-flex justify-content-center">
-                <Link href="../" className="navbar-brand d-flex flex-column align-items-center">
-                  <img src="/images/logoMotogpFacil.png" alt="MotoGP Facil" style={{ width: "50px", height: "auto" }} />
+                <Link
+                  href="../"
+                  className="navbar-brand d-flex flex-column align-items-center"
+                >
+                  <img
+                    src="/images/logoMotogpFacil.png"
+                    alt="MotoGP Facil"
+                    style={{ width: "50px", height: "auto" }}
+                  />
                   <span className="fs-4">MotoGP Facil</span>
                 </Link>
               </div>
-
               <div className="col-4 d-flex justify-content-end">
                 <ul className="navbar-nav">
                   <li className="nav-item">
@@ -94,22 +108,28 @@ function Equipos() {
           </div>
         </div>
       </nav>
-      
+
       <div className="container text-center my-5">
         <h1 className="mb-4">Equipos de MotoGP</h1>
-
         {/* Botones de fabricantes */}
-        <div className="d-flex justify-content-center gap-2 mb-4">
+        <div className="d-flex flex-wrap justify-content-center gap-2 mb-4">
           {fabricantes.map((fabricante, index) => (
             <button
               key={index}
-              className={`btn ${fabricanteSeleccionado === fabricante ? "btn-danger" : "btn-secondary"}`}
+              className={`btn ${
+                fabricanteSeleccionado === fabricante
+                  ? "btn-danger"
+                  : "btn-secondary"
+              } mobile-btn`}
               onClick={() => setFabricanteSeleccionado(fabricante)}
             >
               {fabricante}
             </button>
           ))}
-          <button className="btn btn-dark" onClick={() => setFabricanteSeleccionado(null)}>
+          <button
+            className="btn btn-dark mobile-btn"
+            onClick={() => setFabricanteSeleccionado(null)}
+          >
             Todos
           </button>
         </div>
@@ -121,13 +141,14 @@ function Equipos() {
               <div className="card shadow-sm">
                 <div className="card-body">
                   <h5 className="card-title">{equipo.nombre}</h5>
-                  <p className="card-text text-muted">Escudería: {equipo.escuderia}</p>
+                  <p className="card-text text-muted">
+                    Escudería: {equipo.escuderia}
+                  </p>
                 </div>
               </div>
             </div>
           ))}
         </div>
-
         {equiposFiltrados.length === 0 && (
           <p className="text-muted mt-3">No hay equipos para esta escudería.</p>
         )}

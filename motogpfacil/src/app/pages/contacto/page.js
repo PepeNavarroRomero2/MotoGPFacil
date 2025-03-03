@@ -1,10 +1,9 @@
 "use client";
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import emailjs from "@emailjs/browser";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
+// Se elimina la importación estática de Bootstrap JS
 import styles from "../../navbar.css";
 
 function Contacto() {
@@ -26,8 +25,7 @@ function Contacto() {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.nombre.trim())
-      newErrors.nombre = "El nombre es obligatorio.";
+    if (!formData.nombre.trim()) newErrors.nombre = "El nombre es obligatorio.";
     if (!formData.correo.trim())
       newErrors.correo = "El correo es obligatorio.";
     else if (!/\S+@\S+\.\S+/.test(formData.correo))
@@ -41,7 +39,6 @@ function Contacto() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!validateForm()) return;
     setSending(true);
     const serviceID = "service_tvnz84o";
@@ -55,12 +52,7 @@ function Contacto() {
     };
 
     try {
-      const result = await emailjs.send(
-        serviceID,
-        templateID,
-        templateParams,
-        userID
-      );
+      const result = await emailjs.send(serviceID, templateID, templateParams, userID);
       console.log("Mensaje enviado correctamente", result);
       alert("Mensaje enviado correctamente.");
       setFormData({ nombre: "", correo: "", mensaje: "" });
@@ -68,13 +60,15 @@ function Contacto() {
     } catch (error) {
       console.error("Error al enviar mensaje:", error);
       alert("Error al enviar el mensaje.");
-      console.error("Error al enviar mensaje:", JSON.stringify(error, null, 2));
-      console.error("Propiedades del error:", Object.keys(error));
-
     } finally {
       setSending(false);
     }
   };
+
+  // Carga dinámica del JS de Bootstrap (solo en el cliente)
+  useEffect(() => {
+    import("bootstrap/dist/js/bootstrap.bundle.min.js");
+  }, []);
 
   return (
     <div className="bg-dark min-vh-100 text-light">
@@ -91,7 +85,6 @@ function Contacto() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-
           <div className="collapse navbar-collapse" id="navbarNavCentered">
             <div className="row w-100 align-items-center">
               <div className="col-4 d-flex justify-content-start">
@@ -108,7 +101,6 @@ function Contacto() {
                   </li>
                 </ul>
               </div>
-
               <div className="col-4 d-flex justify-content-center">
                 <Link href="../">
                   <span className="navbar-brand d-flex flex-column align-items-center">
@@ -121,7 +113,6 @@ function Contacto() {
                   </span>
                 </Link>
               </div>
-
               <div className="col-4 d-flex justify-content-end">
                 <ul className="navbar-nav">
                   <li className="nav-item">
@@ -148,10 +139,7 @@ function Contacto() {
 
       <div className="container py-4">
         <h2 className="mb-3">Contacto</h2>
-        <form
-          onSubmit={handleSubmit}
-          className="shadow p-4 rounded bg-light text-dark"
-        >
+        <form onSubmit={handleSubmit} className="shadow p-4 rounded bg-light text-dark">
           <div className="mb-3">
             <label className="form-label">Nombre</label>
             <input
@@ -161,9 +149,7 @@ function Contacto() {
               value={formData.nombre}
               onChange={handleChange}
             />
-            {errors.nombre && (
-              <div className="invalid-feedback">{errors.nombre}</div>
-            )}
+            {errors.nombre && <div className="invalid-feedback">{errors.nombre}</div>}
           </div>
 
           <div className="mb-3">
@@ -175,9 +161,7 @@ function Contacto() {
               value={formData.correo}
               onChange={handleChange}
             />
-            {errors.correo && (
-              <div className="invalid-feedback">{errors.correo}</div>
-            )}
+            {errors.correo && <div className="invalid-feedback">{errors.correo}</div>}
           </div>
 
           <div className="mb-3">
@@ -189,9 +173,7 @@ function Contacto() {
               value={formData.mensaje}
               onChange={handleChange}
             ></textarea>
-            {errors.mensaje && (
-              <div className="invalid-feedback">{errors.mensaje}</div>
-            )}
+            {errors.mensaje && <div className="invalid-feedback">{errors.mensaje}</div>}
           </div>
 
           <button type="submit" className="btn btn-primary w-100" disabled={sending}>
