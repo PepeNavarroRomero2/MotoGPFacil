@@ -36,7 +36,7 @@ function Pilotos() {
   return (
     <div className="container-fluid">
       {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className={`navbar navbar-expand-lg navbar-dark ${navbarStyles.navbar}`}>
         <div className="container">
           <button
             className="navbar-toggler"
@@ -49,6 +49,7 @@ function Pilotos() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
+
           <div className="collapse navbar-collapse" id="navbarNavCentered">
             <div className="row w-100 align-items-center">
               <div className="col-4 d-flex justify-content-start">
@@ -65,19 +66,14 @@ function Pilotos() {
                   </li>
                 </ul>
               </div>
+
               <div className="col-4 d-flex justify-content-center">
-                <Link
-                  href="../"
-                  className="navbar-brand d-flex flex-column align-items-center"
-                >
-                  <img
-                    src="/images/logoMotogpFacil.png"
-                    alt="MotoGP Facil"
-                    style={{ width: "50px", height: "auto" }}
-                  />
+                <Link href="../" className="navbar-brand d-flex flex-column align-items-center">
+                  <img src="/images/logoMotogpFacil.png" alt="MotoGP Facil" style={{ width: "50px", height: "auto" }} />
                   <span className="fs-4">MotoGP Facil</span>
                 </Link>
               </div>
+
               <div className="col-4 d-flex justify-content-end">
                 <ul className="navbar-nav">
                   <li className="nav-item">
