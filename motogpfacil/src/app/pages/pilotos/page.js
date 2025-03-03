@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 // Se elimina la importación estática de Bootstrap JS
 import Link from "next/link";
+import styles from "../../navbar.css";
 
 const teamColors = {
   4: "orange",
@@ -74,15 +75,11 @@ function Pilotos() {
 
               <div className="col-4 d-flex justify-content-center">
                 <Link href="../" className="navbar-brand d-flex flex-column align-items-center">
-<<<<<<< HEAD
-                  <img src="/images/logoMotogpFacil.png" alt="MotoGP Facil" style={{ width: "50px", height: "auto" }} />
-=======
                   <img
                     src="/images/logoMotogpFacil.png"
                     alt="MotoGP Facil"
                     style={{ width: "50px", height: "auto" }}
                   />
->>>>>>> c57ae480be297d6d5578b2e0e54a04c8dea188d4
                   <span className="fs-4">MotoGP Facil</span>
                 </Link>
               </div>
