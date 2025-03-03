@@ -25,7 +25,9 @@ function Equipos() {
 
   useEffect(() => {
     if (fabricanteSeleccionado) {
-      const filtrados = equipos.filter((equipo) => equipo.escuderia === fabricanteSeleccionado);
+      const filtrados = equipos.filter(
+        (equipo) => equipo.escuderia === fabricanteSeleccionado
+      );
       setEquiposFiltrados(filtrados);
     } else {
       setEquiposFiltrados(equipos);
@@ -39,7 +41,9 @@ function Equipos() {
 
   return (
     <>
-      <nav className={`navbar navbar-expand-lg navbar-dark ${navbarStyles.navbar}`}>
+      <nav
+        className={`navbar navbar-expand-lg navbar-dark ${navbarStyles.navbar}`}
+      >
         <div className="container">
           <button
             className="navbar-toggler"
@@ -69,8 +73,15 @@ function Equipos() {
                 </ul>
               </div>
               <div className="col-4 d-flex justify-content-center">
-                <Link href="../" className="navbar-brand d-flex flex-column align-items-center">
-                  <img src="/images/logoMotogpFacil.png" alt="MotoGP Facil" style={{ width: "50px", height: "auto" }} />
+                <Link
+                  href="../"
+                  className="navbar-brand d-flex flex-column align-items-center"
+                >
+                  <img
+                    src="/images/logoMotogpFacil.png"
+                    alt="MotoGP Facil"
+                    style={{ width: "50px", height: "auto" }}
+                  />
                   <span className="fs-4">MotoGP Facil</span>
                 </Link>
               </div>
@@ -97,24 +108,32 @@ function Equipos() {
           </div>
         </div>
       </nav>
-      
+
       <div className="container text-center my-5">
         <h1 className="mb-4">Equipos de MotoGP</h1>
         {/* Botones de fabricantes */}
-        <div className="d-flex justify-content-center gap-2 mb-4">
+        <div className="d-flex flex-wrap justify-content-center gap-2 mb-4">
           {fabricantes.map((fabricante, index) => (
             <button
               key={index}
-              className={`btn ${fabricanteSeleccionado === fabricante ? "btn-danger" : "btn-secondary"}`}
+              className={`btn ${
+                fabricanteSeleccionado === fabricante
+                  ? "btn-danger"
+                  : "btn-secondary"
+              } mobile-btn`}
               onClick={() => setFabricanteSeleccionado(fabricante)}
             >
               {fabricante}
             </button>
           ))}
-          <button className="btn btn-dark" onClick={() => setFabricanteSeleccionado(null)}>
+          <button
+            className="btn btn-dark mobile-btn"
+            onClick={() => setFabricanteSeleccionado(null)}
+          >
             Todos
           </button>
         </div>
+
         {/* Lista de equipos */}
         <div className="row">
           {equiposFiltrados.map((equipo) => (
@@ -122,7 +141,9 @@ function Equipos() {
               <div className="card shadow-sm">
                 <div className="card-body">
                   <h5 className="card-title">{equipo.nombre}</h5>
-                  <p className="card-text text-muted">Escudería: {equipo.escuderia}</p>
+                  <p className="card-text text-muted">
+                    Escudería: {equipo.escuderia}
+                  </p>
                 </div>
               </div>
             </div>
