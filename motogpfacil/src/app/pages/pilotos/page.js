@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
+// Se elimina la importación estática de Bootstrap JS
+import Link from "next/link";
 
 const teamColors = {
   4: "orange",
@@ -16,7 +16,7 @@ const teamColors = {
   9: "orange",
   8: "yellow",
   2: "#708090",
-  10: "blue"
+  10: "blue",
 };
 
 function Pilotos() {
@@ -31,6 +31,11 @@ function Pilotos() {
 
   useEffect(() => {
     fetchPilotos();
+  }, []);
+
+  // Carga dinámica del JS de Bootstrap (solo en el cliente)
+  useEffect(() => {
+    import("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
 
   return (
@@ -66,10 +71,7 @@ function Pilotos() {
                 </ul>
               </div>
               <div className="col-4 d-flex justify-content-center">
-                <Link
-                  href="../"
-                  className="navbar-brand d-flex flex-column align-items-center"
-                >
+                <Link href="../" className="navbar-brand d-flex flex-column align-items-center">
                   <img
                     src="/images/logoMotogpFacil.png"
                     alt="MotoGP Facil"
@@ -122,9 +124,8 @@ function Pilotos() {
                 <div
                   className="card"
                   style={{
-                    backgroundColor:
-                      hoveredCard === piloto.id ? teamColor : "white",
-                    transition: "background-color 0.3s ease"
+                    backgroundColor: hoveredCard === piloto.id ? teamColor : "white",
+                    transition: "background-color 0.3s ease",
                   }}
                 >
                   <img

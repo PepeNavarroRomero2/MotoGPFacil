@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import Link from "next/link"
+// Se elimina la importación estática de Bootstrap JS
+import Link from "next/link";
 import "../../Reglamento.css";
 import "../../navbar.css";
 
@@ -46,6 +46,11 @@ function MotoGPQuiz() {
     fetchReglamento();
   }, []);
 
+  // Carga dinámica del JS de Bootstrap (solo en el cliente)
+  useEffect(() => {
+    import("bootstrap/dist/js/bootstrap.bundle.min.js");
+  }, []);
+
   function handleAnswer(option) {
     if (option === questions[currentQuestion].correctAnswer) {
       setScore(score + 1);
@@ -74,7 +79,6 @@ function MotoGPQuiz() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-
           <div className="collapse navbar-collapse" id="navbarNavCentered">
             <div className="row w-100 align-items-center">
               <div className="col-4 d-flex justify-content-start">
@@ -91,12 +95,8 @@ function MotoGPQuiz() {
                   </li>
                 </ul>
               </div>
-
               <div className="col-4 d-flex justify-content-center">
-                <Link
-                  href="/"
-                  className="navbar-brand d-flex flex-column align-items-center"
-                >
+                <Link href="/" className="navbar-brand d-flex flex-column align-items-center">
                   <img
                     src="/images/logoMotogpFacil.png"
                     alt="MotoGP Facil"
@@ -105,7 +105,6 @@ function MotoGPQuiz() {
                   <span className="fs-4">MotoGP Facil</span>
                 </Link>
               </div>
-
               <div className="col-4 d-flex justify-content-end">
                 <ul className="navbar-nav">
                   <li className="nav-item">

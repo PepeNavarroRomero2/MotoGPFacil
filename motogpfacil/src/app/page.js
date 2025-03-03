@@ -1,10 +1,16 @@
 "use client";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
+// Se elimina la importación estática de Bootstrap JS
 import styles from "./navbar.css";
 
 export default function Home() {
+  // Carga dinámica de Bootstrap JS solo en el cliente
+  useEffect(() => {
+    import("bootstrap/dist/js/bootstrap.bundle.min.js");
+  }, []);
+
   return (
     <div className="bg-dark min-vh-100 text-light">
       <nav className={`navbar navbar-expand-lg navbar-dark ${styles.navbar}`}>

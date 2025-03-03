@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import calendarioStyles from "../../Calendario.module.css";
 import navbarStyles from "../../navbar.css";
 
@@ -37,6 +36,11 @@ function Calendario() {
 
   useEffect(() => {
     fetchContacts();
+  }, []);
+
+  // Carga dinámica del JS de Bootstrap (se ejecuta solo en el cliente)
+  useEffect(() => {
+    import("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
 
   return (
@@ -118,9 +122,16 @@ function Calendario() {
                 <div className={calendarioStyles.numero}>{index + 1}</div>
                 <div className={calendarioStyles.info}>
                   <h5 className={calendarioStyles.nombre}>{evento.circuito}</h5>
-                  <p className={calendarioStyles.fechas}>{evento.fecha_inicio} - {evento.fecha_fin}</p>
+                  <p className={calendarioStyles.fechas}>
+                    {evento.fecha_inicio} - {evento.fecha_fin}
+                  </p>
                   <p className={calendarioStyles.ubicacion}>
-                    {evento.pais} <img src={`/images/banderas/${banderas[evento.pais]}`} alt={evento.pais} className={calendarioStyles.banderaPais} />
+                    {evento.pais}{" "}
+                    <img
+                      src={`/images/banderas/${banderas[evento.pais]}`}
+                      alt={evento.pais}
+                      className={calendarioStyles.banderaPais}
+                    />
                   </p>
                 </div>
                 <img src={evento.imageUrl} alt={evento.pais} className={calendarioStyles.bandera} />
