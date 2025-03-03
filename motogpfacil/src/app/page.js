@@ -2,11 +2,9 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
-// Se elimina la importación estática de Bootstrap JS
 import styles from "./navbar.css";
 
 export default function Home() {
-  // Carga dinámica de Bootstrap JS solo en el cliente
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);

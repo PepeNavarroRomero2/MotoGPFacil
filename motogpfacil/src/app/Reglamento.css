@@ -27,7 +27,7 @@
 }
   
 .options button:hover {
-    background-color: #e60000;
+    background-color: rgb(206, 165, 0);
 }
   
 .quiz-container p {
