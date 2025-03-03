@@ -42,7 +42,7 @@ function Pilotos() {
   return (
     <div className="container-fluid">
       {/* Navbar */}
-      <nav className={`navbar navbar-expand-lg navbar-dark ${navbarStyles.navbar}`}>
+      <nav className={`navbar navbar-expand-lg navbar-dark ${styles.navbar}`}>
         <div className="container">
           <button
             className="navbar-toggler"
